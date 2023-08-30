@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TodosTest {
 
     @Test
-    public void shouldAddThreeTasksOfDifferentType() {
+    public void shouldAddTasksOfDifferentType() {
         SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -29,7 +29,58 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldAddThreeTasksOfDifferentType2() {
+    public void shouldAddTasksOfDifferentType2() {
+        SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
+
+        String[] subtasks = {"Молоко", "Приложение", "Хлеб"};
+        Epic epic = new Epic(55, subtasks);
+
+        Meeting meeting = new Meeting(
+                555,
+                "Выкатка 3й версии приложения",
+                "Приложение НетоБанка",
+                "Во вторник после обеда"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {epic, meeting};
+        Task[] actual = todos.search("Приложение");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddTasksOfDifferentType3() {
+        SimpleTask simpleTask = new SimpleTask(5, "Установка новой версии");
+
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
+        Epic epic = new Epic(55, subtasks);
+
+        Meeting meeting = new Meeting(
+                555,
+                "Выкатка 3й версии приложения",
+                "Приложение НетоБанка",
+                "Во вторник после обеда"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask, meeting};
+        Task[] actual = todos.search("версии");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldAddTasks() {
         SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -54,7 +105,7 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldAddThreeTasksOfDifferentType3() {
+    public void shouldAddTasks2() {
         SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -79,7 +130,7 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldAddThreeTasksOfDifferentType4() {
+    public void shouldAddTasks3() {
         SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -104,7 +155,7 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldAddThreeTasksOfDifferentType5() {
+    public void NotTasks() {
         SimpleTask simpleTask = new SimpleTask(5, "Купить Молоко родителям");
 
         String[] subtasks = {"Молоко", "Приложение", "Хлеб"};
@@ -123,8 +174,9 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] expected = {epic, meeting};
-        Task[] actual = todos.search("Приложение");
+        Task[] expected = {};
+        Task[] actual = todos.search("Мороженое");
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }
